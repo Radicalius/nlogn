@@ -2,7 +2,7 @@ hr {
   border: 1px dotted #AAA;
 }
 
-p {
+body {
   font-family: Montserrat;
 }
 
@@ -13,7 +13,7 @@ h1, h2 {
 pre {
   background-color: #EEE;
   padding: 10px 10px 10px 10px;
-  font-family: monospace;
+  font-family: 'Source Code Pro';
   border-radius: 4px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -22,7 +22,7 @@ code {
   background-color: #FFEEEE;
   color: #AA0000;
   border-radius: 4px;
-  font-family: monospace;
+  font-family: 'Source Code Pro';
   padding: 2px 2px 2px 2px;
 }
 
@@ -31,9 +31,23 @@ a {
   color: #00AAFF;
 }
 
+blockquote {
+  margin-left: 0px;
+  padding-left: 50px;
+  border-left: 5px solid #AAA;
+  color: #AAA;
+}
+
+tag {
+  background-color: #EEEEEE;
+  font-family: 'Source Code Pro';
+  padding: 2px 2px 2px 2px;
+  border-radius: 4px;
+}
+
 #content {
   width: 40%;
-  height: 100%;
+  min-width: 1000px;
   margin: auto;
   background-color: #FFF;
   padding: 20px 20px 20px 20px;
@@ -53,7 +67,7 @@ a {
 #title {
   font-size: 40px;
   color: #999;
-  font-family: monospace;
+  font-family: 'Source Code Pro';
 }
 
 .link {
@@ -62,4 +76,8 @@ a {
   padding-left: 10px;
   font-family: Montserrat;
   color: #AAA;
+}
+
+.link:hover {
+  color: #000;
 }

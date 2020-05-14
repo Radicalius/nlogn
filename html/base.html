@@ -7,6 +7,9 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Playfair+Display">
     </link>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Code+Pro">
+    </link>
     <link href="css/main.css" rel=stylesheet type=text/css></link>
   </head>
 
@@ -18,11 +21,11 @@
       <table width=100%>
         <tr>
           <td><span id=title>O(<i>n</i>log<i>n</i>)</span></td>
-          <td id=links><a class=link>Home</a>
-          <a class=link>Programming</a>
-          <a class=link>Datascience</a>
-          <a class=link>Music</a>
-          <a class=link>About</a> </td>
+          <td id=links><a href=/ class=link>Home</a>
+          <a href="/computing" class=link>Computing</a>
+          <a href="/datascience" class=link>Datascience</a>
+          <a href="/music" class=link>Music</a>
+          <a herf="/about" class=link>About</a> </td>
           <td><span style="visibility: hidden;" id=title>O(nlogn)</span></td>
         </tr>
       </table>
@@ -31,11 +34,19 @@
 
     <div id=article>
 
-    <br><br><br><br>
+    <br><br>
 
-    {% include page %}
+    {% if markdown %}
+      {{content | safe}}
+    {% else %}
+      {% include page %}
+    {% endif %}
 
     </div>
+
+    <hr>
+
+    <p>Copyright Zachary Cotton 2020.  All rights reserved.</p>
 
     </div>
 

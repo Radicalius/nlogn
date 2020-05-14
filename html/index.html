@@ -1,16 +1,14 @@
-<p>Sept 1, 1997</p>
-<h1> Title </h1>
-<hr>
-<H2> subheading </h2>
+A blog about hacks, data, and tunes.
+<h1> {{type}} Articles </h1>
+<hr/>
 
-<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras accumsan mattis velit eget porttitor. Donec efficitur imperdiet quam, ut ornare ligula sollicitudin eget. Vivamus facilisis bibendum diam et varius. Phasellus venenatis mi tristique, dignissim mauris eget, lobortis ligula. Sed vitae volutpat nisl, et semper odio. Nam ac velit tellus. Vestibulum vitae lectus quis velit ullamcorper ultricies. Mauris commodo gravida risus, in euismod arcu laoreet vel. Aenean dolor tortor, pulvinar efficitur scelerisque sed, commodo quis mi. Vivamus at lectus nec erat fermentum accumsan. </p>
-
-<p>Nam venenatis, enim sed eleifend aliquam, turpis odio molestie quam, in fermentum nulla purus in diam. Sed at arcu molestie, aliquet justo eget, fermentum erat. Aliquam sed sollicitudin mauris, non pretium nisi. Praesent quis lorem ac est fermentum cursus. Suspendisse suscipit condimentum ex in sodales. Donec finibus semper sapien, et vulputate nunc condimentum vitae. Cras imperdiet mi vitae efficitur porta. Duis vehicula eu eros eget congue. Nunc tortor turpis, iaculis a enim eget, vehicula interdum tellus. Nullam vitae posuere erat. Mauris vulputate maximus dolor at commodo. Praesent fermentum, dolor eget maximus faucibus, urna purus condimentum justo, eu tempor nisl nisl nec nisi.</p>
-
-<pre>
-sudo apt-get install -y grub
-</pre>
-
-<p> Lets try some inline code shall we? <code>github.com</code> </p>
-
-<p> And links what do they look like? <a href=google.com>Google</a></p>
+{% for i in posts %}
+<h1> {{i["date"]}}: {{i["title"]}}</h1>
+<p>{{i["desc"]}}</p>
+<br/>
+{% for j in i["tags"] %}
+<tag>{{j}}</tag>&nbsp;
+{% endfor %}
+<br/><br/>
+<a href={{i["link"]}}>Read More</a>
+{% endfor %}
