@@ -1,4 +1,4 @@
-import flask, os, json
+import flask, os, json, sys
 from flask import Flask, render_template, send_file
 from mdparser import *
 
@@ -34,4 +34,4 @@ def style(file):
     return send_file("css/"+file)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="0.0.0.0", port=int(sys.argv[1]))
