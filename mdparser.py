@@ -1,6 +1,6 @@
 import re
 
-TOKENS = ["@", "\n+", "#", "##", "###", "_", "__", "-", "--", "---", "\\*\\*", "[\t ]+", "[\t ]*\\*", "~", "~~", "```", "`", "``", ">", "> ", "\\!", "\\!\\[", "\\[","\\]", "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/]+"]
+TOKENS = ["\\\\", "\\\\.", "@", "\n+", "#", "##", "###", "_", "__", "-", "--", "---", "\\*\\*", "[\t ]+", "[\t ]*\\*", "~", "~~", "```", "`", "``", ">", "> ", "\\!", "\\!\\[", "\\[","\\]", "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/\"]+"]
 
 def tokenize(md):
     tokens = []
@@ -54,7 +54,9 @@ def parse(tokens):
         return ""
     if tokens[0][0] == "":
         return tokens.pop(0)[1]
-    elif tokens[0][0] == "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/]+":
+    if tokens[0][0] == "\\\\.":
+        return str(tokens.pop(0)[1][1])
+    elif tokens[0][0] == "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/\"]+":
         return tokens.pop(0)[1]
     elif tokens[0][0] == "@":
         text+=parse_tag(tokens)
@@ -139,15 +141,37 @@ def parse_header(tokens):
     text += "</{0}>\n".format(heads[type])
     return text
 
+def parse_until(tokens, pred):
+    text = ""
+    while tokens:
+        if pred(tokens[0]):
+            break
+        else:
+            if tokens[0][0] == "\\\\.":
+                text += tokens[0][1][1]
+            else:
+                text += tokens[0][1]
+            tokens.pop(0)
+    return text
+
+def safe_pop(tokens):
+    if tokens:
+        tokens.pop(0)
+
 def parse_link(tokens):
     if len(tokens) < 4:
         return "["
-    href = tokens[3][1].split(")")[0][1:]
-    post_text = tokens[3][1].split(")")[1]
-    link_text = tokens[1][1]
-    for i in range(4):
-        tokens.pop(0)
-    return "<a href={0}>{1}</a> {2}".format(href, link_text, post_text)
+    i = 3
+    safe_pop(tokens)
+    link_text = parse_until(tokens, lambda x: x[0] == "\\]")
+    safe_pop(tokens)
+    href = parse_until(tokens, lambda x: ")" in x[1])
+    post_text = ""
+    if tokens:
+        href += tokens[0][1].split(")")[0]
+        post_text = tokens[0][1].split(")")[1]
+    safe_pop(tokens)
+    return "<a href={0}>{1}</a> {2}".format(href[1:], link_text, post_text)
 
 def parse_image(tokens):
     if len(tokens) < 4:
@@ -161,7 +185,7 @@ def parse_image(tokens):
 def parse_tag(tokens):
     tokens.pop(0)
     print(tokens[0])
-    if tokens[0][0] == "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/]+":
+    if tokens[0][0] == "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/]+\"":
         return "<tag>"+tokens.pop(0)[1].strip()+"</tag>&nbsp;"
     return "@"
 
@@ -186,7 +210,6 @@ def render_html(md_file):
     md = open(md_file).read()
     html = ""
     tokens = tokenize(md)
-    print(tokens)
     l = len(tokens)
     while len(tokens):
         html += parse(tokens)

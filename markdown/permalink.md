@@ -6,7 +6,7 @@
 I've been applying to jobs recently.  When I apply to a job, I usually copy down the link to the job description in a spreadsheet so that I can refer back to it before interviewing.  However, job postings are not necessarily kept visible after they are closed to applications, which can be well before they interview candidates.  I recently found that many of the links I copied down are now broken.  I figure that I need a way of [permalinking](https://en.wikipedia.org/wiki/Permalink) job description pages, so that I can refer to them after they've been taken down.  Though there are probably many good tools available for saving pages, I wanted to try to make my own.
 ## The Specifics
 
-I decided that what I really wanted was an in-browser button I could click that would copy a permalink to the clipboard.  [Web browser extensions](https://extensionworkshop.com) lend themselves nicely to this task, as they allow you to create a browser button that runs a script when clicked.  I opted to store the page on the local machine and run a web server in the background to process requests to the permalinks.  When the button in the web extension is pressed, it would send a request to the web server with the url of the active tab.  The HTTP server would download the source of the page, store it to disk, and send back a permalink to the web extension.  When the extension recieved the permalink it would copy it to the clipboard.
+I decided that what I really wanted was an in-browser button I could click that would copy a permalink to the clipboard.  [Web browser extensions](https://extensionworkshop.com/\#about) lend themselves nicely to this task, as they allow you to create a browser button that runs a script when clicked.  I opted to store the page on the local machine and run a web server in the background to process requests to the permalinks.  When the button in the web extension is pressed, it would send a request to the web server with the url of the active tab.  The HTTP server would download the source of the page, store it to disk, and send back a permalink to the web extension.  When the extension recieved the permalink it would copy it to the clipboard.
 
 ## Server Implementation
 
@@ -24,7 +24,7 @@ def add():
     resp.headers["Access-Control-Allow-Origin"] = "*"
     return resp
 ```
-> Note the inclusion of the `Access-Control-Allow-Origin` header.  This is necessary to ensure that the web extension script gets the response because the its origin will differ from that of the page being permalinked.
+> Note the inclusion of the [Access-Control-Allow-Origin](https://web.dev/cross-origin-resource-sharing/) header.  This is necessary to ensure that the web extension script gets the response because the its origin will differ from that of the page being permalinked.
 
 In a nutshell, the add endpoint stores the source of the page at the specified url in `pages/[hash]` where `hash` is the sha256 hash of the url. It responds with a permalink to the page which points back to the local web server.  Queries to the permalinks are handled by the get endpoint, which is implemented as follows:
 ```
