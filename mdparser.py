@@ -1,6 +1,6 @@
 import re
 
-TOKENS = ["\\\\", "\\\\.", "@", "\n+", "#", "##", "###", "_", "__", "-", "--", "---", "\\*\\*", "[\t ]+", "[\t ]*\\*", "~", "~~", "```", "`", "``", ">", "> ", "\\!", "\\!\\[", "\\[","\\]", "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/\"]+"]
+TOKENS = ["\\\\", "\\\\.", "@", "\n+", "#", "##", "###", "_", "__", "-", "--", "---", "\\*\\*", "[\t ]+", "[\t ]*\\*", "~", "~~", "```", "```[a-z]*", "`", "``", ">", "> ", "\\!", "\\!\\[", "\\[","\\]", "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/\"]+"]
 
 def tokenize(md):
     tokens = []
@@ -73,7 +73,7 @@ def parse(tokens):
         text += parse_quote(tokens)
     elif tokens[0][0] == "`":
         text += parse_inline_code(tokens)
-    elif tokens[0][0] == "```":
+    elif tokens[0][0] == "```[a-z]*":
         text += parse_code_block(tokens)
     elif tokens[0][0] == "\\[":
         text += parse_link(tokens)
@@ -107,13 +107,13 @@ def parse_inline_code(tokens):
     return text
 
 def parse_code_block(tokens):
-    text = "<pre>"
+    text = "<pre class='{0}'><code>".format(tokens[0][1].replace("```", ""))
     tokens.pop(0)
-    while tokens and tokens[0][0] != "```":
+    while tokens and tokens[0][0] != "```[a-z]*":
         text += tokens.pop(0)[1]
     if tokens:
         tokens.pop(0)
-    text += "</pre>"
+    text += "</code></pre>"
     return text
 
 def parse_quote(tokens):

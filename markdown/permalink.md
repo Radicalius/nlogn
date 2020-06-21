@@ -11,7 +11,7 @@ I decided that what I really wanted was an in-browser button I could click that 
 ## Server Implementation
 
 I wrote the backend web server using Python 3 + [Flask](https://flask.palletsprojects.com/en/1.1.x/quickstart/).  The code for the add endpoint, which is responsible for permalink creation, is as follows:
-```
+```python
 @app.route("/add", methods=["POST"])
 def add():
     url = request.form["url"].encode("utf8")
@@ -27,8 +27,8 @@ def add():
 > Note the inclusion of the [Access-Control-Allow-Origin](https://web.dev/cross-origin-resource-sharing/) header.  This is necessary to ensure that the web extension script gets the response because the its origin will differ from that of the page being permalinked.
 
 In a nutshell, the add endpoint stores the source of the page at the specified url in `pages/[hash]` where `hash` is the sha256 hash of the url. It responds with a permalink to the page which points back to the local web server.  Queries to the permalinks are handled by the get endpoint, which is implemented as follows:
-```
-app.route("/<hash>")
+```python
+@app.route("/<hash>")
 def get(hash):
     resp = send_file("pages/{0}".format(hash))
     resp.headers["Content-Type"] = "text/html"
@@ -42,7 +42,7 @@ To make it easier to run this server as a daemon, I wrapped it in a Docker conta
 
 To add a button to the toolbar, I added the following snippet to `manifest.json`:
 
-```
+```json
 "browser_action": {
     "browser_style": true,
     "default_icon": {
@@ -52,13 +52,13 @@ To add a button to the toolbar, I added the following snippet to `manifest.json`
   }
 ```
 Getting this button to function required adding a backgound script which supplies an onclick listener using `browser.browserAction.onClicked.addListener`.  This was accomplished by first adding the following to `manifest.json`:
-```
+```json
 "background": {
    "scripts": ["background/bg.js"]
 }
 ```
 Then in `background/bg.js` I added the following onclick listener which queries the add endpoint with the url of the current tab:
-```
+```javascript
 browser.browserAction.onClicked.addListener((tab) => {
   var xhttp = new XMLHttpRequest()
   xhttp.onreadystatechange = function() {
@@ -73,7 +73,7 @@ browser.browserAction.onClicked.addListener((tab) => {
 > Accessing `tab.url` requires the `tabs` permissions, which can be enabled in manifest.json
 
 The listener also copies the permalink that is contained in the response to the clipboard by calling `copyToClipboad`.  The implementation is outlined below:
-```
+```javascript
 function copyToClipboad(text) {
   const el = document.createElement('textarea');
   el.value = text;

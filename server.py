@@ -33,5 +33,9 @@ def article(name):
 def style(file):
     return send_file("css/"+file)
 
+@app.route("/scripts/<file>")
+def script(file):
+    return send_file("scripts/"+file)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(sys.argv[1]))
