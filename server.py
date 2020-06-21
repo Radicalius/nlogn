@@ -27,7 +27,7 @@ def computing(t):
 
 @app.route("/articles/<name>")
 def article(name):
-    return render_template("base.html", page="index.html")
+    return render_template("base.html", content=render_html("markdown/"+name+".md"), markdown=True)
 
 @app.route("/css/<file>")
 def style(file):

@@ -63,8 +63,8 @@ def parse(tokens):
     elif tokens[0][0] == "\n+":
         text += "<br/>"*len(tokens[0][1])
         tokens.pop(0)
-    # elif tokens[0][0] == "[\t ]*\\*":
-    #     text += parse_list(tokens)
+    elif tokens[0][0] == "[\t ]*\\*":
+         text += parse_list(tokens)
     elif tokens[0][0] in ["\\*\\*", "--", "~~", "__"]:
         text += parse_style(tokens)
     elif tokens[0][0] == "> ":
@@ -166,7 +166,20 @@ def parse_tag(tokens):
     return "@"
 
 def parse_list(tokens):
-    return ""
+    ret = "<ul>"
+    tokens.pop(0)
+    while True:
+        ret += "<li>"
+        while tokens and tokens[0][0] != "\n+":
+            ret += parse(tokens)
+        if tokens:
+            tokens.pop(0)
+        ret += "</li>"
+        if tokens and tokens[0][0] == "[\t ]*\\*":
+            tokens.pop(0)
+        else:
+            break
+    return ret+"</ul>"
 
 
 def render_html(md_file):
