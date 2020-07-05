@@ -37,5 +37,9 @@ def style(file):
 def script(file):
     return send_file("scripts/"+file)
 
+@app.route("/img/<img>")
+def image(img):
+    return send_file("img/"+img)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(sys.argv[1]))

@@ -110,7 +110,11 @@ def parse_code_block(tokens):
     text = "<pre class='{0}'><code>".format(tokens[0][1].replace("```", ""))
     tokens.pop(0)
     while tokens and tokens[0][0] != "```[a-z]*":
-        text += tokens.pop(0)[1]
+        if tokens[0][1] == "\\`":
+            text += "`"
+            tokens.pop(0)
+        else:
+            text += tokens.pop(0)[1]
     if tokens:
         tokens.pop(0)
     text += "</code></pre>"
@@ -176,11 +180,16 @@ def parse_link(tokens):
 def parse_image(tokens):
     if len(tokens) < 4:
         return "!["
-    src = tokens[3][1][1:-1]
-    desc = tokens[1][1]
-    for i in range(4):
-        tokens.pop(0)
-    return "<br/><img src={0} desc={1} /><br/>".format(src, desc)
+    safe_pop(tokens)
+    img_text = parse_until(tokens, lambda x: x[0] == "\\]")
+    safe_pop(tokens)
+    src = parse_until(tokens, lambda x: ")" in x[1])[1:]
+    post_text = ""
+    if tokens:
+        src += tokens[0][1].split(")")[0]
+        post_text = tokens[0][1].split(")")[1]
+    safe_pop(tokens)
+    return "<br/><img src={0} desc={1} /><br/>{2}".format(src, img_text, post_text)
 
 def parse_tag(tokens):
     tokens.pop(0)
