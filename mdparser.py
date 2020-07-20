@@ -63,7 +63,7 @@ def parse(tokens):
     elif tokens[0][0] in ["#", "##", "###"]:
         text += parse_header(tokens)
     elif tokens[0][0] == "\n+":
-        text += "<br/>"*len(tokens[0][1])
+        text += "<br/>"
         tokens.pop(0)
     elif tokens[0][0] == "[\t ]*\\*":
          text += parse_list(tokens)
@@ -107,7 +107,7 @@ def parse_inline_code(tokens):
     return text
 
 def parse_code_block(tokens):
-    text = "<pre class='{0}'><code>".format(tokens[0][1].replace("```", ""))
+    text = "<pre class='{0}' style='atom-one-light'><code>".format(tokens[0][1].replace("```", ""))
     tokens.pop(0)
     while tokens and tokens[0][0] != "```[a-z]*":
         if tokens[0][1] == "\\`":
@@ -189,7 +189,7 @@ def parse_image(tokens):
         src += tokens[0][1].split(")")[0]
         post_text = tokens[0][1].split(")")[1]
     safe_pop(tokens)
-    return "<br/><img src={0} desc={1} /><br/>{2}".format(src, img_text, post_text)
+    return "<img src={0} desc={1} />{2}".format(src, img_text, post_text)
 
 def parse_tag(tokens):
     tokens.pop(0)

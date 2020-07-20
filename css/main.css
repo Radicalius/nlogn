@@ -4,6 +4,7 @@ hr {
 
 body {
   font-family: Montserrat;
+  line-height: 1.6;
 }
 
 h1, h2 {
@@ -11,7 +12,7 @@ h1, h2 {
 }
 
 pre {
-  background-color: #EEE;
+  background-color: #fafafa;
   padding: 10px 10px 10px 10px;
   font-family: 'Source Code Pro';
   border-radius: 4px;

@@ -18,7 +18,7 @@
       }
     </script>
     <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/default.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/atom-one-light.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </head>
@@ -44,9 +44,8 @@
 
     <div id=article>
 
-    <br><br>
-
     {% if markdown %}
+      <br><br>
       {{content | safe}}
     {% else %}
       {% include page %}

@@ -6,8 +6,9 @@ function number_lines() {
     var newHTML = ""
     var i = 1
     lines = code.innerHTML.split("\n")
+    lines = lines
     for (line in lines) {
-      if (lines[line] != "") {
+      if (line > 0 && line < lines.length-1) {
         if (i < 10) {
           newHTML += " "
         }

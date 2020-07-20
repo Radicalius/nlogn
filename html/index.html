@@ -1,14 +1,14 @@
-A blog about hacks, data, and tunes.
+A blog about programming, data, and music.
 <h1> {{type}} Articles </h1>
 <hr/>
 
 {% for i in posts %}
-<h1> {{i["date"]}}: {{i["title"]}}</h1>
-<p>{{i["desc"]}}</p>
-<br/>
+{{i["date"]}}
+<h2> {{i["title"]}}</h2>
+<p>{{i["desc"]}}<br/>
+<a href={{i["link"]}}>Read More</a></p>
 {% for j in i["tags"] %}
 <tag>{{j}}</tag>&nbsp;
 {% endfor %}
 <br/><br/>
-<a href={{i["link"]}}>Read More</a>
 {% endfor %}
