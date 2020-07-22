@@ -1,0 +1,15 @@
+version: '2'
+services:
+   web:
+     build: ./web
+     ports:
+      - "8000:8000"
+
+   proxy:
+     build: ./proxy
+     environment:
+       - "PORT=2000"
+     ports:
+       - "8080:2000"
+     depends_on:
+       - web
