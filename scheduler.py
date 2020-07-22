@@ -10,5 +10,5 @@ while True:
     time.sleep(60)
     now = datetime.datetime.now()
     for job in jobs:
-        if jobs[0](now.hour, now.minute):
-            jobs[1]()
+        if job[0](now.hour, now.minute):
+            job[1]()
