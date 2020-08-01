@@ -1,6 +1,7 @@
 > July 20, 2020
 
 # Mock Coding Interview Tool
+[github](repo://mock-interview) [demo](demo://interview)
 ---
 
 I have been practicing coding interviews with my computer science friends recently.  We have been sharing Leetcode over zoom.  Though this works, it is a very different environment than enterprise coding interview tools like [Code Pair](`https://www.hackerrank.com/products/codepair/?campaignid=1693960202&adgroupid=68741430191&adid=437658713184&gclid=CjwKCAjwgdX4BRB_EiwAg8O8Hf3MVY9G8Xdl-04nMZeergkaGS-9kdh-JR7Ecvk1xrRPyCEOV__FzRoCeyAQAvD_BwE`) or [CoderPad](https://coderpad.io/).  Unlike Leetcode, these tools do not have a "Submit" button that checks the solution.  Because it is so tempting to spam the Submit button, it would probably be more productive to practice with a real coding interview tool.  I couldn't find any free tools available, so I decided to implement my own.

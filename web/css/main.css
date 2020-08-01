@@ -82,3 +82,7 @@ tag {
 .link:hover {
   color: #000;
 }
+
+.badge {
+  padding-right: 8px;
+}

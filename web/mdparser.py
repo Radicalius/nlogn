@@ -175,7 +175,14 @@ def parse_link(tokens):
         href += tokens[0][1].split(")")[0]
         post_text = tokens[0][1].split(")")[1]
     safe_pop(tokens)
-    return "<a href={0}>{1}</a> {2}".format(href[1:], link_text, post_text)
+    href = href[1:]
+    if href.startswith("repo://"):
+        href = href.replace("repo://", "https://github.com/Radicalius/")
+        return "<a href={0}><img class=badge src='https://img.shields.io/badge/-View Code-grey?logo=github&style=plastic' /></a>".format(href)
+    if href.startswith("demo://"):
+        href = href.replace("demo://", "http://")+".nlogn.blog"
+        return "<a href={0}><img class=badge src='https://img.shields.io/badge/demo-online-green?style=plastic' /></a>".format(href)
+    return "<a href={0}>{1}</a> {2}".format(href, link_text, post_text)
 
 def parse_image(tokens):
     if len(tokens) < 4:
