@@ -1,6 +1,7 @@
 import flask, os, json, sys, requests
 from flask import Flask, render_template, send_file
 from mdparser import *
+from threading import Timer
 
 template_dir = os.path.abspath("html")
 app = Flask(__name__, template_folder=template_dir)
@@ -41,5 +42,10 @@ def script(file):
 def image(img):
     return send_file("img/"+img)
 
+def wake_up():
+    requests.get("http://www.nlogn.blog")
+    Timer(60, wake_up).start()
+
 if __name__ == "__main__":
+    Timer(60, wake_up).start()
     app.run(host="0.0.0.0", port=int(sys.argv[1]))
