@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title> nlogn | Redirecting... </title>
+
+    <script>
+
+      function redirectWhenReady () {
+
+        var query = "/check/{{ domain }}"
+        var url = "http://{{ domain }}.nlogn.blog";
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", query, true );
+        xmlHttp.send( null );
+        xmlHttp.timeout = 2000;
+
+        xmlHttp.onload = function() {
+          if (xmlHttp.status == 200) {
+            window.location.replace(url);
+          }
+        }
+      }
+
+      redirectWhenReady()
+      setInterval(redirectWhenReady, 5000)
+
+    </script>
+
+  </head>
+
+  <body>
+    <center>
+      <h1> Launching Demo </h1>
+      <p> Should take about 30 seconds. Thank you for your patience. </p>
+    </center>
+  </body>
+</html>
