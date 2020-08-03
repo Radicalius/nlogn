@@ -1,7 +1,7 @@
 > June 20th, 2020
 
 # Web Browser Extension for Permalinking Pages
-
+[github](repo://permalink)
 ---
 I've been applying to jobs recently.  When I apply to a job, I usually copy down the link to the job description in a spreadsheet so that I can refer back to it before interviewing.  However, job postings are not necessarily kept visible after they are closed to applications, which can be well before they interview candidates.  I recently found that many of the links I copied down are now broken.  I figure that I need a way of [permalinking](https://en.wikipedia.org/wiki/Permalink) job description pages, so that I can refer to them after they've been taken down.  Though there are probably many good tools available for saving pages, I wanted to try to make my own.
 ## The Specifics

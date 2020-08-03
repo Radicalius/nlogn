@@ -5,10 +5,18 @@ A blog about programming, data, and music.
 {% for i in posts %}
 {{i["date"]}}
 <h2> {{i["title"]}}</h2>
+{% if "repo" in i%}
+<a href={{ "https://github.com/Radicalius/" + i["repo"] }}><img src='https://img.shields.io/badge/-View Code-grey?logo=github&style=plastic' /></a>
+{% endif %}
+{% if "demo" in i %}
+<a href=http://redirect.nlogn.blog/to/{{ i["demo"] }}><img class=badge src='https://img.shields.io/badge/demo-online-green?style=plastic' /></a>
+{% endif %}
 <p>{{i["desc"]}}<br/>
 <a href={{i["link"]}}>Read More</a></p>
 {% for j in i["tags"] %}
-<tag>{{j}}</tag>&nbsp;
+<a href=/{{j}}>
+  <img src=https://img.shields.io/badge/-{{ j }}-lightgrey>&nbsp;
+</a>
 {% endfor %}
-<br/><br/>
+<hr/>
 {% endfor %}

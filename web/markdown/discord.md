@@ -1,8 +1,10 @@
 > July 4, 2020
 
 # Simple Discord Chat Bot Graphical User Interfaces
+[github](repo://discord-bot-ui) [demo](demo://discord-ui)
+---
 
-Though the `discord` chatbot api is rather limited, there is a surprising amount of things you can do with bots.  I recently discovered that it is possible to make simple graphical user interfaces with discord chat bots.  By exploiting chat reactions, message editing, and embeds, one can create rudimentary buttons.  In this tutorial, we will implement a bot that displays server status for a set of servers. 
+Though the `discord` chatbot api is rather limited, there is a surprising amount of things you can do with bots.  I recently discovered that it is possible to make simple graphical user interfaces with discord chat bots.  By exploiting chat reactions, message editing, and embeds, one can create rudimentary buttons.  In this tutorial, we will implement a bot that displays server status for a set of servers.
 
 ![img](/img/bot_final.png)
 
@@ -13,7 +15,7 @@ This tutorial assumes that you already know how to set up a discord bot.  If not
 This tutorial uses `python3` + `discord.py` as our development framework.  Assuming you have `python3` and `pip` installed correctly, the `discord.py` module can be installed with the following command:
 ```sh
 python3 -m pip install discord.py
-``` 
+```
 
 ## Some Skeleton Code
 
@@ -66,7 +68,7 @@ await message.add_reaction('🔄')
 await message.add_reaction('\u25b6')
 ```
 ![image_thingy](/img/bot_reactions.png)
-   
+
 ## Responding to Button Presses
 
 > The following code snippets are psuedocode that outline what we need to do.  For the actual implementation, skip to the end of this section.
@@ -128,7 +130,7 @@ await message.clear_reactions()
 
 ## Putting It All Together
 
-```python 
+```python
 @bot.command()
 async def status(ctx):
 
@@ -177,7 +179,7 @@ async def status(ctx):
 
     await message.clear_reactions()
 ```
-The end result looks something like this: 
+The end result looks something like this:
 ![img](/img/bot_final.png)
 
 ## Limitations and Extensions

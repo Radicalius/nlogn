@@ -11,6 +11,8 @@
       "title": "Mock Coding Interview Tool",
       "date": " July 20, 2020",
       "desc": "I have been practicing coding interviews with my friends.  Because many of the common coding interview tools (e.g. CodePair, CoderPad, etc) cost money, I decided to build my own using node js and socket io.  This article highlights the design decisions made and analyzes the limitations of this project.",
+      "repo": "mock-interview",
+      "demo": "interview",
       "tags": ["computing"],
       "link": "/articles/interview"
     },
@@ -18,6 +20,8 @@
       "title": "Simple Discord Chat Bot Graphical User Interfaces",
       "date": " July 4, 2020",
       "desc": "Though the discord chatbot api is rather limited, there is a surprising amount of things you can do with bots.  I recently discovered that it is possible to make simple graphical user interfaces with discord chat bots.  By exploiting chat reactions, message editing, and embeds, one can create rudimentary buttons.  In this tutorial, we will implement a bot that displays server status for a set of servers. \n",
+      "repo": "discord-bot-ui",
+      "demo": "discord-ui",
       "tags": ["computing"],
       "link": "/articles/discord"
     },
@@ -25,6 +29,7 @@
       "title": "Browser Extension for Permalinking Pages",
       "date": "June 20, 2020",
       "desc": "I needed a convenient method for saving job description pages so that I could refer to them later even if they were taken down.  I built a web browser extension that did exactly that.  This article outlines the implementation of the browser extension and analyzes some of the limitations of this approach.",
+      "repo": "permalink",
       "tags": ["computing"],
       "link": "/articles/permalink"
     }
