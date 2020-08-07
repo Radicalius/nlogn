@@ -52,8 +52,8 @@ tag {
 }
 
 #content {
-  width: 40%;
-  min-width: 1000px;
+  width: 75%;
+  max-width: 1000px;
   margin: auto;
   background-color: #FFF;
   padding: 20px 20px 20px 20px;

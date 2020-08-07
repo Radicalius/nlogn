@@ -12,8 +12,10 @@
     </link>
     <link href="/css/main.css" rel=stylesheet type=text/css></link>
     <script src=/scripts/line_numbering.js></script>
+    <script src=/scripts/img_sizing.js></script>
     <script>
       window.onload = function() {
+        scale_images()
         number_lines()
       }
     </script>
@@ -23,7 +25,7 @@
     <script>hljs.initHighlightingOnLoad();</script>
   </head>
 
-  <body>
+  <body onresize=javascript:scale_images()>
 
     <div id=content>
 
