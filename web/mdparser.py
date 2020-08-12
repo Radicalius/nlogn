@@ -107,7 +107,7 @@ def parse_inline_code(tokens):
     return text
 
 def parse_code_block(tokens):
-    text = "<pre class='{0}' style='atom-one-light'><code>".format(tokens[0][1].replace("```", ""))
+    text = "<div class=codeblock><pre class='{0}' style='atom-one-light'><code>".format(tokens[0][1].replace("```", ""))
     tokens.pop(0)
     while tokens and tokens[0][0] != "```[a-z]*":
         if tokens[0][1] == "\\`":
@@ -117,7 +117,7 @@ def parse_code_block(tokens):
             text += tokens.pop(0)[1]
     if tokens:
         tokens.pop(0)
-    text += "</code></pre>"
+    text += "</code></pre></div>"
     return text
 
 def parse_quote(tokens):
