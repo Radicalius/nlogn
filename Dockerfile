@@ -10,5 +10,6 @@ COPY proxy/nginx.conf /etc/nginx/nginx-template.conf
 COPY start.sh /
 COPY ./web /
 COPY ./redirect redirect
+COPY ./cache cache
 
 CMD bash start.sh
