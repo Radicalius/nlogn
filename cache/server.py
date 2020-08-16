@@ -17,7 +17,7 @@ def get(domain, file):
 @app.route("/<domain>/<file>", methods=["POST"])
 def post(domain, file):
     cont = requests.get("http://"+domain+".nlogn.blog/"+file, timeout=2).text
-    r.put(domain+"/"+file, cont)
+    r.set(domain+"/"+file, cont)
     return "", 201
 
 if __name__ == "__main__":
