@@ -43,7 +43,7 @@ def image(img):
     return send_file("img/"+img)
 
 def wake_up():
-    requests.get("http://www.nlogn.blog")
+    requests.get("https://www.nlogn.blog")
     Timer(60, wake_up).start()
 
 if __name__ == "__main__":

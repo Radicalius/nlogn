@@ -187,7 +187,7 @@ def parse_link(tokens):
         href = href.replace("repo://", "https://github.com/Radicalius/")
         return "<a href={0}><img class=badge src='https://img.shields.io/badge/-View Code-grey?logo=github&style=plastic' /></a>".format(href)
     if href.startswith("demo://"):
-        href = "http://redirect.nlogn.blog/to/"+href.replace("demo://", "")
+        href = "https://redirect.nlogn.blog/to/"+href.replace("demo://", "")
         return "<a href={0}><img class=badge src='https://img.shields.io/badge/demo-online-green?style=plastic' /></a>".format(href)
     return "<a href={0}>{1}</a> {2}".format(href, link_text, post_text)
 

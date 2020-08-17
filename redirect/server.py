@@ -12,7 +12,7 @@ def redirect(domain):
 @app.route("/check/<domain>")
 def check(domain):
     try:
-        requests.get("http://{0}.nlogn.blog".format(domain), timeout=2)
+        requests.get("https://{0}.nlogn.blog".format(domain), timeout=2)
         return "", 200
     except:
         return "", 500
