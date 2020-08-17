@@ -1,6 +1,7 @@
 import re
 
-TOKENS = ["\\\\", "\\\\.", "@", "\n+", "#", "##", "###", "_", "__", "-", "--", "---", "\\*\\*", "[\t ]+", "[\t ]*\\*", "~", "~~", "```", "```[a-z]*", "`", "``", ">", "> ", "\\!", "\\!\\[", "\\[","\\]", "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/\"]+"]
+TOKENS = ["\\d+\\.", "\\\\", "\\\\.", "@", "\n+", "#", "##", "###", "_", "__", "-", "--", "---", "\\*\\*", "[\t ]+", "[\t ]*\\*", "~", "~~", "```", "```[a-z]*", "`", "``", ">", "> ", "\\!", "\\!\\[", "\\[","\\]", "[a-zA-Z0-9 ,.!$%^&(){}=;'+:/\"]+"]
+MIN_MUNCH = ["\\d+\\."]
 
 def tokenize(md):
     tokens = []
@@ -16,6 +17,10 @@ def tokenize(md):
                 if match and match.end() == ahead:
                     matched = True
                     last_matched = i
+                    if last_matched in MIN_MUNCH:
+                        matched = False
+                        ahead += 1
+                        break
             if not matched:
                 break
             else:
@@ -67,6 +72,8 @@ def parse(tokens):
         tokens.pop(0)
     elif tokens[0][0] == "[\t ]*\\*":
          text += parse_list(tokens)
+    elif tokens[0][0] == "\\d+\\.":
+        text += parse_numbered_list(tokens)
     elif tokens[0][0] in ["\\*\\*", "--", "~~", "__"]:
         text += parse_style(tokens)
     elif tokens[0][0] == "> ":
@@ -195,6 +202,8 @@ def parse_image(tokens):
     if tokens:
         src += tokens[0][1].split(")")[0]
         post_text = tokens[0][1].split(")")[1]
+    if src[0] == "(":
+        src = src[1:]
     safe_pop(tokens)
     return "<img src={0} desc={1} />{2}".format(src, img_text, post_text)
 
@@ -221,11 +230,27 @@ def parse_list(tokens):
             break
     return ret+"</ul>"
 
+def parse_numbered_list(tokens):
+    ret = "<ol>"
+    tokens.pop(0)
+    while True:
+        ret += "<li>"
+        while tokens and tokens[0][0] != "\n+":
+            ret += parse(tokens)
+        if tokens:
+            tokens.pop(0)
+        ret += "</li>"
+        if tokens and tokens[0][0] == "\\d+\\.":
+            tokens.pop(0)
+        else:
+            break
+    return ret+"</ol>"
 
 def render_html(md_file):
     md = open(md_file).read()
     html = ""
     tokens = tokenize(md)
+    print(tokens)
     l = len(tokens)
     while len(tokens):
         html += parse(tokens)
