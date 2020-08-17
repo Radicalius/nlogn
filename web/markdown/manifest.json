@@ -1,6 +1,14 @@
 {
   "files": [
     {
+      "title": "Web Scraping New Grad Software Engineering Jobs",
+      "data": "August 16, 2020",
+      "desc": "One thing that I've learned during my job hunt is that many online job boards are not great at identifying roles for new grads.  To get better results, I scraped some prominent job boards and applied my own filters.  This article describes how my scraper works and how it could be improved.",
+      "tags": ["computing"],
+      "repo": "job-scraper",
+      "link": "/articles/job_scraper"
+    },
+    {
       "title": "Open Source Music Production Setup on Ubuntu",
       "date": "August 1, 2020",
       "desc": "I spent a couple days this week building a free, bare-bones music production setup on Ubuntu.  This article describes what I came up with, how to install it on your Ubuntu System, and some of its idiosyncrasies.",
