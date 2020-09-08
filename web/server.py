@@ -20,6 +20,10 @@ mf = json.load(open("markdown/manifest.json"))
 def index():
     return render_template("base.html", markdown=False, page="index.html", posts=mf["files"])
 
+@app.route("/favicon.ico")
+def favicon():
+    return send_file("img/favicon.ico")
+
 @app.route("/<t>")
 def computing(t):
     if t not in ["music", "computing", "datascience"]:
