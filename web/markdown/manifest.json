@@ -1,6 +1,14 @@
 {
   "files": [
     {
+      "title": "Rocket Taco: HeyTaco! Inspired Rocket.Chat Bot",
+      "date": "September 12, 2020",
+      "tags": ["computing"],
+      "desc": "I felt like HeyTaco!, a teambuilding Slack Bot, would be a great fit for my coop.  However, there was no freely available version of the bot for Rocket.Chat, a self-hosted Slack alternative which my coop was plaaning on using.  So I decided to try to write my own bot in ruby.  This article describes its implementation.",
+      "repo": "rocket-taco",
+      "link": "/articles/rocket_taco"
+    },
+    {
       "title": "BSC Uptime: Heartbeat Monitoring Webservice",
       "date": "September 7, 2020",
       "tags": ["computing"],
