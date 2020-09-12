@@ -13,7 +13,7 @@
       "date": "September 7, 2020",
       "tags": ["computing"],
       "desc": "(You can log into the demo using username: admin@bscuptime.com and password: admin.) When I was in college, I built a heartbeat monitoring service to monitor internet outages in my student cooperative.  This article outlines its implementation and design considerations.",
-      "repo": "bscuptime",
+      "repo": "bsc-uptime",
       "demo": "bscuptime",
       "link": "/articles/bscuptime"
     },
